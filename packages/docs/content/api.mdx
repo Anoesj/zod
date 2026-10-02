@@ -276,6 +276,7 @@ z.cidrv6();        // ipv6 CIDR block
 z.creditCard();    // credit card number (Luhn checksum)
 z.currencyCode();  // ISO 4217 currency code
 z.iban();          // IBAN (ISO 7064 mod-97 checksum)
+z.gtin();          // GTIN-8, -12, -13 or -14 (GS1 mod-10 checksum)
 z.hash("sha256");  // or "sha1", "sha384", "sha512", "md5"
 z.iso.date();
 z.iso.time();
@@ -613,6 +614,23 @@ iban.parse("de89370400440532013000");      // ❌ uppercase only
 iban.parse("DE89370400440532013001");      // ❌ failed checksum
 iban.parse("DE00000000000000000066");      // ❌ check digits are always 02–98
 ```
+
+### GTINs
+
+Validate a [Global Trade Item Number](https://en.wikipedia.org/wiki/Global_Trade_Item_Number) (GTIN): 8, 12, 13 or 14 digits with a valid GS1 mod-10 check digit. This covers EAN-8, UPC-A, EAN-13 (including ISBN-13) and GTIN-14. Digits only, and the input is returned as-is, not zero-padded. Use `.length()` to require a single length (`.check(z.length())` in Zod Mini).
+
+```ts
+const gtin = z.gtin();
+gtin.parse("4006381333931");   // ✅ GTIN-13
+gtin.parse("036000291452");    // ✅ GTIN-12
+gtin.parse("4006381333932");   // ❌ failed checksum
+gtin.parse("4006 381 333931"); // ❌ digits only
+gtin.parse("12345678905");     // ❌ 11 digits is not a GTIN length
+
+z.gtin().length(13);           // GTIN-13 only
+```
+
+UPC-E codes are 8 digits but their check digit is computed over the expanded UPC-A form, so expand them to UPC-A before validating. ISBN-10 is not supported.
 
 ### JWTs
 

@@ -712,6 +712,7 @@ export type $ZodStringFormats =
   | "e164"
   | "credit_card"
   | "iban"
+  | "gtin"
   | "lowercase"
   | "uppercase"
   | "regex"

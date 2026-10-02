@@ -1044,6 +1044,19 @@ export function iban(params?: string | core.$ZodIBANParams): ZodIBAN {
   return core._iban(ZodIBAN, params);
 }
 
+// ZodGTIN
+export interface ZodGTIN extends ZodStringFormat<"gtin"> {
+  _zod: core.$ZodGTINInternals;
+}
+export const ZodGTIN: core.$constructor<ZodGTIN> = /*@__PURE__*/ core.$constructor("ZodGTIN", (inst, def) => {
+  core.$ZodGTIN.init(inst, def);
+  ZodStringFormat.init(inst, def);
+});
+
+export function gtin(params?: string | core.$ZodGTINParams): ZodGTIN {
+  return core._gtin(ZodGTIN, params);
+}
+
 // ZodJWT
 export interface ZodJWT extends ZodStringFormat<"jwt"> {
   _zod: core.$ZodJWTInternals;

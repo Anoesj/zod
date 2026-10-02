@@ -354,6 +354,20 @@ test("z.iban", () => {
   expect(() => z.parse(a, 123)).toThrow();
 });
 
+test("z.gtin", () => {
+  const a = z.gtin();
+  expect(z.parse(a, "96385074")).toEqual("96385074");
+  expect(z.parse(a, "4006381333931")).toEqual("4006381333931");
+  expect(z.parse(a.check(z.length(13)), "4006381333931")).toEqual("4006381333931");
+  expect(() => z.parse(a.check(z.length(13)), "96385074")).toThrow();
+  // failed checksum
+  expect(() => z.parse(a, "4006381333932")).toThrow();
+  // valid check digit, wrong length
+  expect(() => z.parse(a, "12345678905")).toThrow();
+  expect(() => z.parse(a, "4006 381 333931")).toThrow();
+  expect(() => z.parse(a, 4006381333931)).toThrow();
+});
+
 test("z.jwt", () => {
   const a = z.jwt();
   // valid jwt

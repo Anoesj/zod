@@ -105,6 +105,9 @@ export const currencyCode: RegExp =
 // iban electronic format: 2-letter country, check digits 02-98 (the only values `98 - remainder` can produce), 11-30 bban characters
 export const iban: RegExp = /^[A-Z]{2}(?!00|01|99)\d{2}[A-Z0-9]{11,30}$/;
 
+// gtin-8, -12, -13 or -14 digits; 9-11 are not gtin lengths
+export const gtin: RegExp = /^(?:\d{8}|\d{12,14})$/;
+
 const dateSource = `(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))`;
 
 /** Anchors a pattern source. The interpolation lives here rather than at the call site because

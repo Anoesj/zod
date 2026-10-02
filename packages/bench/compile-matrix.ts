@@ -44,6 +44,7 @@ add("string", "iso.datetime", z.iso.datetime(), "2026-08-16T12:00:00Z");
 add("string", "base64", z.base64(), "aGVsbG8gd29ybGQ=");
 add("string", "creditCard", z.creditCard(), "4111111111111111");
 add("string", "iban", z.iban(), "DE89370400440532013000");
+add("string", "gtin", z.gtin(), "4006381333931");
 add("string", "trim + toLowerCase", z.string().trim().toLowerCase(), "  MiXeD Case  ");
 
 // --- numbers ---

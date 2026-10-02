@@ -90,6 +90,7 @@ const error: () => errors.$ZodErrorMap = () => {
     credit_card: { label: "מספר כרטיס אשראי", gender: "m" },
     currency_code: { label: "קוד מטבע", gender: "m" },
     iban: { label: "IBAN", gender: "m" },
+    gtin: { label: "GTIN", gender: "m" },
     jwt: { label: "JWT", gender: "m" },
     template_literal: { label: "קלט", gender: "m" },
     ends_with: { label: "קלט", gender: "m" },
