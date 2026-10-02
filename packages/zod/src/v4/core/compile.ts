@@ -9,6 +9,7 @@ import {
   isValidBase64URL,
   isValidCIDRv6,
   isValidCreditCard,
+  isValidGTIN,
   isValidIBAN,
   isValidIPv6,
   isValidJWT,
@@ -822,6 +823,11 @@ function generateStringFormatCheck(
   }
   if (fmt === "iban") {
     const validator = addConstant(ctx, isValidIBAN);
+    doc.write(`if (!${validator}(${accessor})) return INVALID;`);
+    return accessor;
+  }
+  if (fmt === "gtin") {
+    const validator = addConstant(ctx, isValidGTIN);
     doc.write(`if (!${validator}(${accessor})) return INVALID;`);
     return accessor;
   }

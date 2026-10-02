@@ -515,6 +515,23 @@ export function _iban<T extends schemas.$ZodIBAN>(
   });
 }
 
+// GTIN
+export type $ZodGTINParams = StringFormatParams<schemas.$ZodGTIN, "pattern" | "when">;
+export type $ZodCheckGTINParams = CheckStringFormatParams<schemas.$ZodGTIN, "pattern" | "when">;
+// @__NO_SIDE_EFFECTS__
+export function _gtin<T extends schemas.$ZodGTIN>(
+  Class: util.SchemaClass<T>,
+  params?: string | $ZodGTINParams | $ZodCheckGTINParams
+): T {
+  return new Class({
+    type: "string",
+    format: "gtin",
+    check: "string_format",
+    abort: false,
+    ...util.normalizeParams(params),
+  });
+}
+
 // JWT
 export type $ZodJWTParams = StringFormatParams<schemas.$ZodJWT, "pattern" | "when">;
 export type $ZodCheckJWTParams = CheckStringFormatParams<schemas.$ZodJWT, "pattern" | "when">;

@@ -525,6 +525,21 @@ export function iban(params?: string | core.$ZodIBANParams): ZodMiniIBAN {
   return core._iban(ZodMiniIBAN, params);
 }
 
+// ZodMiniGTIN
+export interface ZodMiniGTIN extends _ZodMiniString<core.$ZodGTINInternals> {}
+export const ZodMiniGTIN: core.$constructor<ZodMiniGTIN> = /*@__PURE__*/ core.$constructor(
+  "ZodMiniGTIN",
+  (inst, def) => {
+    core.$ZodGTIN.init(inst, def);
+    ZodMiniStringFormat.init(inst, def);
+  }
+);
+
+// @__NO_SIDE_EFFECTS__
+export function gtin(params?: string | core.$ZodGTINParams): ZodMiniGTIN {
+  return core._gtin(ZodMiniGTIN, params);
+}
+
 // ZodMiniJWT
 export interface ZodMiniJWT extends _ZodMiniString<core.$ZodJWTInternals> {
   // _zod: core.$ZodJWTInternals;

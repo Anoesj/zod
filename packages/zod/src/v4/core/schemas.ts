@@ -1213,6 +1213,50 @@ export const $ZodIBAN: core.$constructor<$ZodIBAN> = /*@__PURE__*/ core.$constru
   };
 });
 
+//////////////////////////////   ZodGTIN   //////////////////////////////
+
+// gs1 mod 10: weights 3, 1, 3, … leftwards from the check digit
+function isGS1Mod10(digits: string): boolean {
+  const last = digits.length - 1;
+  let sum = digits.charCodeAt(last) - 48;
+  let weight = 3;
+  for (let i = last - 1; i >= 0; i--) {
+    sum += (digits.charCodeAt(i) - 48) * weight;
+    weight ^= 2;
+  }
+  return sum % 10 === 0;
+}
+
+export function isValidGTIN(input: string): boolean {
+  if (!regexes.gtin.test(input)) return false;
+  return isGS1Mod10(input);
+}
+
+export interface $ZodGTINDef extends $ZodStringFormatDef<"gtin"> {}
+export interface $ZodGTINInternals extends $ZodStringFormatInternals<"gtin"> {
+  def: $ZodGTINDef;
+}
+
+export interface $ZodGTIN extends $ZodType {
+  _zod: $ZodGTINInternals;
+}
+
+export const $ZodGTIN: core.$constructor<$ZodGTIN> = /*@__PURE__*/ core.$constructor("$ZodGTIN", (inst, def): void => {
+  // shape only — checksum is not expressible as a pattern
+  def.pattern ??= regexes.gtin;
+  $ZodStringFormat.init(inst, def);
+  inst._zod.check = (payload) => {
+    if (isValidGTIN(payload.value)) return;
+    payload.issues.push({
+      code: "invalid_format",
+      format: "gtin",
+      input: payload.value,
+      inst,
+      continue: !def.abort,
+    });
+  };
+});
+
 //////////////////////////////   ZodJWT   //////////////////////////////
 
 export function isValidJWT(token: string, algorithm: util.JWTAlgorithm | null = null): boolean {
@@ -5185,6 +5229,7 @@ export type $ZodStringFormatTypes =
   | $ZodE164
   | $ZodCreditCard
   | $ZodIBAN
+  | $ZodGTIN
   | $ZodJWT
   | $ZodCustomStringFormat<"hex">
   | $ZodCustomStringFormat<util.HashFormat>

@@ -544,6 +544,8 @@ function convertBaseSchema(schema: JSONSchema.JSONSchema, ctx: ConversionContext
           stringSchema = stringSchema.check(z.creditCard());
         } else if (format === "iban") {
           stringSchema = stringSchema.check(z.iban());
+        } else if (format === "gtin") {
+          stringSchema = stringSchema.check(z.gtin());
         } else if (format === "jwt") {
           stringSchema = stringSchema.check(z.jwt());
         } else if (format === "emoji") {

@@ -27,6 +27,7 @@ const leaves: (() => Built)[] = [
   () => ({ schema: z.uuid(), gen: () => pick(["550e8400-e29b-41d4-a716-446655440000", "no"]) }),
   () => ({ schema: z.creditCard(), gen: () => pick(["4111111111111111", "4111111111111112"]) }),
   () => ({ schema: z.iban(), gen: () => pick(["DE89370400440532013000", "DE89370400440532013001"]) }),
+  () => ({ schema: z.gtin(), gen: () => pick(["4006381333931", "4006381333932", "12345678905"]) }),
   () => ({ schema: z.number(), gen: () => pick([0, -1, 3.5, Number.NaN, Number.POSITIVE_INFINITY]) }),
   () => ({ schema: z.number().int().min(0).max(10), gen: () => pick([0, 5, 11, -1, 2.5]) }),
   () => ({ schema: z.boolean(), gen: () => pick([true, false, "true"]) }),

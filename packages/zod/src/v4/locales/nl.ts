@@ -48,6 +48,7 @@ const error: () => errors.$ZodErrorMap = () => {
     credit_card: "creditcardnummer",
     currency_code: "valutacode",
     iban: "IBAN",
+    gtin: "GTIN",
     jwt: "JWT",
     template_literal: "invoer",
   };

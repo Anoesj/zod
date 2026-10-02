@@ -148,6 +148,7 @@ const error: () => errors.$ZodErrorMap = () => {
     credit_card: "kredito kortelės numeris",
     currency_code: "valiutos kodas",
     iban: "IBAN",
+    gtin: "GTIN",
     jwt: "JWT",
     template_literal: "įvestis",
   };
